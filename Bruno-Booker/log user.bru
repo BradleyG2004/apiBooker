@@ -1,0 +1,18 @@
+meta {
+  name: log user
+  type: http
+  seq: 3
+}
+
+post {
+  url: http://localhost:8080/api/auth/login
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "email": "bradleygangnou@gmail.com",
+    "password": "M0tdepasse237#"
+  }
+}
