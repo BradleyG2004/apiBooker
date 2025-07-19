@@ -1,6 +1,7 @@
 import express from 'express';
 import userRoutes from './routes/user.ts';
 import authRoutes from './routes/auth.ts';
+import dispRoutes from './routes/disponibilities.ts';
 
 
 const app = express();
@@ -15,6 +16,7 @@ app.use(cors({
 
 app.use('/api/users', userRoutes);
 app.use('/api/auth', authRoutes);
+app.use('/api/disponibilities', dispRoutes);
 
 
 const PORT = 8080;

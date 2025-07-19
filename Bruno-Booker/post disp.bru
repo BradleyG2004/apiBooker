@@ -1,0 +1,25 @@
+meta {
+  name: post disp
+  type: http
+  seq: 4
+}
+
+post {
+  url: http://localhost:8080/api/disponibilities/register
+  body: text
+  auth: bearer
+}
+
+auth:bearer {
+  token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjExLCJlbWFpbCI6ImJyYWRsZXlnYW5nbm91QGdtYWlsLmNvbSIsImlhdCI6MTc1MjkzNjE5NiwiZXhwIjoxNzUyOTM5Nzk2fQ.MGzeNEoN-PtMS1hYGRafG2T7m6Vg5eb2hMdJvT2o--I
+}
+
+body:text {
+  [
+    {
+      date: "2025-07-20", 
+      heure_debut: "09:00", 
+      heure_fin: "09:30"
+    }
+  ]
+}
