@@ -13,7 +13,6 @@
   "keywords": [],
   "description": "",
   "dependencies": {
-    "@google-cloud/local-auth": "^2.1.0",
     "bcrypt": "^6.0.0",
     "cors": "^2.8.5",
     "dotenv": "^17.2.0",
