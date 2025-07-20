@@ -10,7 +10,7 @@ app.use(express.json());
 
 app.use(cors({
   origin: ['http://localhost:3000', 'https://booker-plum.vercel.app',],
-  methods: ['GET', 'POST', 'OPTIONS','PUT','PATCH','DELETE'],
+  methods: ['GET', 'POST', 'OPTIONS', 'PUT', 'PATCH', 'DELETE'],
   allowedHeaders: ['Content-Type', 'Authorization']
 }));
 
@@ -30,8 +30,14 @@ cron.schedule('*/30 * * * *', async () => {
       }
     });
 
+    if (!response.ok) {
+      const text = await response.text(); // Pour voir le contenu d'erreur
+      console.error('❌ auto-updt a échoué:', response.status, text);
+      return;
+    }
+
     const data = await response.json();
-    console.log('Réponse auto-updt:', data);
+    console.log('✅ Réponse auto-updt:', data);
   } catch (err) {
     console.error('Erreur lors de l’appel à auto-updt:', err);
   }

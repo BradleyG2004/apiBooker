@@ -57,14 +57,19 @@ export const listDisp = async (req: Request, res: Response) => {
 
 export const autoUpdt = async (req: Request, res: Response) => {
   try {
+    // 🔁 Obtenir l'heure UTC actuelle
     const now = new Date();
 
-    // Exemple : désactiver les dispos passées
+    const currentDate = now.toISOString().split('T')[0]; // ex: "2025-07-20"
+    const currentTime = now.toISOString().split('T')[1].slice(0, 8); // ex: "08:30:00"
+
+    // 🧠 Mise à jour des disponibilités passées
     await pool.query(
       `UPDATE disponibilities 
        SET available = false 
-       WHERE (date < CURRENT_DATE OR (date = CURRENT_DATE AND heure_fin < CURRENT_TIME)) 
-       AND available = true`
+       WHERE (date < $1 OR (date = $1 AND heure_fin < $2)) 
+       AND available = true`,
+      [currentDate, currentTime]
     );
 
     return res.status(200).json({ message: 'Disponibilités mises à jour automatiquement.' });
@@ -73,4 +78,5 @@ export const autoUpdt = async (req: Request, res: Response) => {
     return res.status(500).json({ message: 'Erreur serveur', error: err });
   }
 };
+
 
