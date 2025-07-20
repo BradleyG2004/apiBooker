@@ -29,7 +29,6 @@ export const registerDisp = async (req: Request, res: Response) => {
     const insertQuery = `
       INSERT INTO disponibilities (user_id, date, heure_debut, heure_fin)
       VALUES ($1, $2, $3, $4)
-      ON CONFLICT (user_id, date, heure_debut) DO NOTHING
     `
 
     for (const dispo of disponibilites) {

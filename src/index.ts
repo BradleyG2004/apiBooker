@@ -1,5 +1,6 @@
 import express from 'express';
 import userRoutes from './routes/user';
+import clientRoutes from './routes/client';
 import authRoutes from './routes/auth';
 import dispRoutes from './routes/disponibilities';
 
@@ -15,6 +16,7 @@ app.use(cors({
 }));
 
 app.use('/api/users', userRoutes);
+app.use('/api/clients', clientRoutes);
 app.use('/api/auth', authRoutes);
 app.use('/api/disponibilities', dispRoutes);
 
