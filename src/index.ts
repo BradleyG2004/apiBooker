@@ -3,6 +3,7 @@ import userRoutes from './routes/user';
 import clientRoutes from './routes/client';
 import authRoutes from './routes/auth';
 import dispRoutes from './routes/disponibilities';
+import { MailtrapClient } from "mailtrap"
 
 
 const app = express();
@@ -19,6 +20,11 @@ app.use('/api/users', userRoutes);
 app.use('/api/clients', clientRoutes);
 app.use('/api/auth', authRoutes);
 app.use('/api/disponibilities', dispRoutes);
+
+const PORT = process.env.PORT || 8080;
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+});
 
 const cron = require('node-cron');
 
@@ -43,11 +49,6 @@ cron.schedule('*/30 * * * *', async () => {
   } catch (err) {
     console.error('Erreur lors de l’appel à auto-updt:', err);
   }
-});
-
-const PORT = process.env.PORT || 8080;
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
 });
 
 
