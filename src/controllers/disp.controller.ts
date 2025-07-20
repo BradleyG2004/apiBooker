@@ -54,3 +54,23 @@ export const listDisp = async (req: Request, res: Response) => {
     return res.status(500).json({ message: 'Erreur serveur', error: err });
   }
 };
+
+export const autoUpdt = async (req: Request, res: Response) => {
+  try {
+    const now = new Date();
+
+    // Exemple : désactiver les dispos passées
+    await pool.query(
+      `UPDATE disponibilities 
+       SET available = false 
+       WHERE (date < CURRENT_DATE OR (date = CURRENT_DATE AND heure_fin < CURRENT_TIME)) 
+       AND available = true`
+    );
+
+    return res.status(200).json({ message: 'Disponibilités mises à jour automatiquement.' });
+  } catch (err) {
+    console.error('Erreur dans autoUpdt:', err);
+    return res.status(500).json({ message: 'Erreur serveur', error: err });
+  }
+};
+
