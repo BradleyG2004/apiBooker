@@ -45,7 +45,11 @@ export const registerDisp = async (req: Request, res: Response) => {
 export const listDisp = async (req: Request, res: Response) => {
   try {
     const result = await pool.query(
-      'SELECT id, user_id, date, heure_debut, heure_fin, available FROM disponibilities ORDER BY date, heure_debut'
+      `SELECT d.id, d.user_id, d.date, d.heure_debut, d.heure_fin, d.available, d.reserved_by,
+              c.id as client_id, c.name as client_name, c.email as client_email
+       FROM disponibilities d
+       LEFT JOIN clients c ON d.reserved_by = c.id
+       ORDER BY d.date, d.heure_debut`
     );
     return res.status(200).json(result.rows);
   } catch (err) {
