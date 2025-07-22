@@ -3,11 +3,11 @@ import userRoutes from './routes/user';
 import clientRoutes from './routes/client';
 import authRoutes from './routes/auth';
 import dispRoutes from './routes/disponibilities';
-import { MailtrapClient } from "mailtrap"
+import cors from 'cors';
+import cron from 'node-cron';
 
 
 const app = express();
-const cors = require('cors');
 app.use(express.json());
 
 app.use(cors({
@@ -26,7 +26,7 @@ app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
 
-const cron = require('node-cron');
+// const cron = require('node-cron');
 
 cron.schedule('*/30 * * * *', async () => {
   console.log('🕒 Cron job déclenché - auto-updt');
