@@ -1,6 +1,5 @@
 import { Request, Response } from 'express';
 import { pool } from '../db';
-import { createEvent, EventAttributes, DateTime } from 'ics';
 import dayjs from 'dayjs';
 import axios from 'axios';
 import utc from 'dayjs/plugin/utc';
@@ -39,34 +38,6 @@ export const registerClient = async (req: Request, res: Response) => {
 
     // Extraire les données nécessaires
     const { date, heure_debut, heure_fin } = dispoResult.rows[0];
-
-    // Génération du fichier .ics
-    // const eventDate = new Date(date);
-    // const [year, month, day] = [
-    //   eventDate.getUTCFullYear(),
-    //   eventDate.getUTCMonth() + 1,
-    //   eventDate.getUTCDate(),
-    // ];
-    // const [startHour, startMinute] = heure_debut.split(':').map(Number);
-    // const [endHour, endMinute] = heure_fin.split(':').map(Number);
-
-    // const start: DateTime = [year, month, day, startHour, startMinute];
-    // const end: DateTime = [year, month, day, endHour, endMinute];
-
-    // const eventConfig: EventAttributes = {
-    //   title: 'Rendez-vous avec notre équipe',
-    //   description: 'Confirmation de votre réservation',
-    //   start,
-    //   end,
-    //   location: 'En ligne',
-    //   status: 'CONFIRMED',
-    //   organizer: { name: 'GMTO', email: 'maxguemto@gmail.com' },
-    // };
-
-    // const { error: icsError, value: icsContent } = createEvent(eventConfig);
-    // if (icsError) {
-    //   console.error('Erreur ICS:', icsError);
-    // }
 
     // Génération du lien Google Calendar
     const dateOnly = date.toISOString().split('T')[0];
